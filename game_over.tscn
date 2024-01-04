@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj8snkko2n3ij"]
+
+[ext_resource type="Script" path="res://Script/Death/game_over.cs" id="1_dmdhi"]
+[ext_resource type="Texture2D" uid="uid://crrp205x4040t" path="res://assets/desktop-wallpaper-dark-space-minimal-art-chromebook-pixel.jpg" id="1_wtuxr"]
+[ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="2_jyc67"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x7dm8"]
+font_size = 100
+
+[node name="Game Over" type="Node2D"]
+script = ExtResource("1_dmdhi")
+
+[node name="Desktop-wallpaper-dark-space-minimal-art-chromebook-pixel" type="Sprite2D" parent="."]
+position = Vector2(578, 321)
+scale = Vector2(1.35882, 1.14007)
+texture = ExtResource("1_wtuxr")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 128.0
+offset_right = 1085.0
+offset_bottom = 281.0
+theme_override_fonts/font = ExtResource("2_jyc67")
+theme_override_font_sizes/font_size = 50
+text = "Game Over
+"
+label_settings = SubResource("LabelSettings_x7dm8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Return" type="Button" parent="."]
+offset_left = 435.0
+offset_top = 379.0
+offset_right = 701.0
+offset_bottom = 428.0
+text = "Return to Main Menu
+"
+
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

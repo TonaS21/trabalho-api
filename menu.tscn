@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhpodaiuc85sd"]
+
+[ext_resource type="Script" path="res://Script/Menu/Menu.cs" id="1_4b2em"]
+[ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="3_60pc1"]
+[ext_resource type="PackedScene" uid="uid://d0ykbch4hedjy" path="res://bg.tscn" id="5_m4diu"]
+
+[sub_resource type="FontVariation" id="FontVariation_knjja"]
+base_font = ExtResource("3_60pc1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_upchi"]
+font_size = 100
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_4b2em")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 1153.0
+offset_bottom = 643.0
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 405.0
+offset_top = 426.0
+offset_right = 705.0
+offset_bottom = 511.0
+theme_override_fonts/font = ExtResource("3_60pc1")
+theme_override_font_sizes/font_size = 25
+text = "Quit
+"
+
+[node name="New Game" type="Button" parent="."]
+offset_left = 405.0
+offset_top = 301.0
+offset_right = 705.0
+offset_bottom = 386.0
+theme_override_fonts/font = SubResource("FontVariation_knjja")
+theme_override_font_sizes/font_size = 25
+text = "New Game"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 128.0
+offset_right = 1085.0
+offset_bottom = 281.0
+theme_override_fonts/font = ExtResource("3_60pc1")
+theme_override_font_sizes/font_size = 50
+text = "Apocalypse Now
+"
+label_settings = SubResource("LabelSettings_upchi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bg" parent="." instance=ExtResource("5_m4diu")]
+
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="New Game" to="." method="_on_new_game_pressed"]
