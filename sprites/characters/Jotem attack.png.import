@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drgm4v4mspkf7"
-path="res://.godot/imported/Jotem attack1.png-9c872355742d86347f45051ba83ac7dd.ctex"
+uid="uid://cbo26dcpeh7rk"
+path="res://.godot/imported/Jotem attack.png-da9f442759ebf0df5d36a84660fa4f5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/characters/Jotem attack1.png"
-dest_files=["res://.godot/imported/Jotem attack1.png-9c872355742d86347f45051ba83ac7dd.ctex"]
+source_file="res://sprites/characters/Jotem attack.png"
+dest_files=["res://.godot/imported/Jotem attack.png-da9f442759ebf0df5d36a84660fa4f5f.ctex"]
 
 [params]
 
