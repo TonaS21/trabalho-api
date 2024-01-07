@@ -196,8 +196,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -318,6 +316,8 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip3n1"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.933333)
 border_color = Color(1, 1, 1, 1)
@@ -329,6 +329,7 @@ bg_color = Color(0.772549, 0, 0, 1)
 radius = 24.0
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_krmnc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -341,6 +342,9 @@ sprite_frames = SubResource("SpriteFrames_bobyo")
 animation = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_med7w")
+}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -354,6 +358,54 @@ limit_left = -5600
 limit_top = -2945
 limit_right = 5775
 limit_bottom = 3425
+
+[node name="Position1" type="Marker2D" parent="Camera2D"]
+position = Vector2(-576, -324)
+
+[node name="Position2" type="Marker2D" parent="Camera2D"]
+position = Vector2(-283, -324)
+
+[node name="Position3" type="Marker2D" parent="Camera2D"]
+position = Vector2(0, -324)
+
+[node name="Position4" type="Marker2D" parent="Camera2D"]
+position = Vector2(283, -324)
+
+[node name="Position5" type="Marker2D" parent="Camera2D"]
+position = Vector2(576, -324)
+
+[node name="Position6" type="Marker2D" parent="Camera2D"]
+position = Vector2(576, -162)
+
+[node name="Position7" type="Marker2D" parent="Camera2D"]
+position = Vector2(576, 0)
+
+[node name="Position8" type="Marker2D" parent="Camera2D"]
+position = Vector2(576, 162)
+
+[node name="Position9" type="Marker2D" parent="Camera2D"]
+position = Vector2(576, 324)
+
+[node name="Position10" type="Marker2D" parent="Camera2D"]
+position = Vector2(283, 324)
+
+[node name="Position11" type="Marker2D" parent="Camera2D"]
+position = Vector2(0, 324)
+
+[node name="Position12" type="Marker2D" parent="Camera2D"]
+position = Vector2(-283, 324)
+
+[node name="Position13" type="Marker2D" parent="Camera2D"]
+position = Vector2(-576, 324)
+
+[node name="Position14" type="Marker2D" parent="Camera2D"]
+position = Vector2(-576, 162)
+
+[node name="Position15" type="Marker2D" parent="Camera2D"]
+position = Vector2(-576, 0)
+
+[node name="Position16" type="Marker2D" parent="Camera2D"]
+position = Vector2(-576, -162)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -24.0
