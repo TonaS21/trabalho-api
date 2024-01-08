@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c0gwl18jory4c"]
+[gd_scene load_steps=42 format=3 uid="uid://c0gwl18jory4c"]
 
 [ext_resource type="Script" path="res://Script/Player/player.cs" id="1_krmnc"]
 [ext_resource type="Texture2D" uid="uid://c3yexyffefxwc" path="res://sprites/characters/Jotem_idle.png" id="2_2qamq"]
@@ -196,6 +196,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -316,8 +318,6 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip3n1"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.933333)
 border_color = Color(1, 1, 1, 1)
@@ -327,6 +327,9 @@ bg_color = Color(0.772549, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
 radius = 24.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gmtph"]
+font_size = 25
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -342,9 +345,6 @@ sprite_frames = SubResource("SpriteFrames_bobyo")
 animation = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_med7w")
-}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -359,52 +359,52 @@ limit_top = -2945
 limit_right = 5775
 limit_bottom = 3425
 
-[node name="Position1" type="Marker2D" parent="Camera2D"]
+[node name="Position1" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-576, -324)
 
-[node name="Position2" type="Marker2D" parent="Camera2D"]
+[node name="Position2" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-283, -324)
 
-[node name="Position3" type="Marker2D" parent="Camera2D"]
+[node name="Position3" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(0, -324)
 
-[node name="Position4" type="Marker2D" parent="Camera2D"]
+[node name="Position4" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(283, -324)
 
-[node name="Position5" type="Marker2D" parent="Camera2D"]
+[node name="Position5" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(576, -324)
 
-[node name="Position6" type="Marker2D" parent="Camera2D"]
+[node name="Position6" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(576, -162)
 
-[node name="Position7" type="Marker2D" parent="Camera2D"]
+[node name="Position7" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(576, 0)
 
-[node name="Position8" type="Marker2D" parent="Camera2D"]
+[node name="Position8" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(576, 162)
 
-[node name="Position9" type="Marker2D" parent="Camera2D"]
+[node name="Position9" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(576, 324)
 
-[node name="Position10" type="Marker2D" parent="Camera2D"]
+[node name="Position10" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(283, 324)
 
-[node name="Position11" type="Marker2D" parent="Camera2D"]
+[node name="Position11" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(0, 324)
 
-[node name="Position12" type="Marker2D" parent="Camera2D"]
+[node name="Position12" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-283, 324)
 
-[node name="Position13" type="Marker2D" parent="Camera2D"]
+[node name="Position13" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-576, 324)
 
-[node name="Position14" type="Marker2D" parent="Camera2D"]
+[node name="Position14" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-576, 162)
 
-[node name="Position15" type="Marker2D" parent="Camera2D"]
+[node name="Position15" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-576, 0)
 
-[node name="Position16" type="Marker2D" parent="Camera2D"]
+[node name="Position16" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(-576, -162)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -426,6 +426,20 @@ shape = SubResource("CircleShape2D_oe1f8")
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="Time" type="Label" parent="."]
+offset_left = -56.0
+offset_top = -320.0
+offset_right = 56.0
+offset_bottom = -282.0
+text = "5:00"
+label_settings = SubResource("LabelSettings_gmtph")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
