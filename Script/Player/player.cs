@@ -1,4 +1,5 @@
 using Godot;
+using GodotPlugins.Game;
 using System;
 
 public partial class player : CharacterBody2D
@@ -9,11 +10,12 @@ public partial class player : CharacterBody2D
 	public Timer timer;
 	public ProgressBar Health;
 	
-	bool en_range = false;
-	bool en_attack_cooldown = true;
-	bool playerAlive = true;
+	public bool en_range = false;
+	public bool en_attack_cooldown = true;
+	public bool playerAlive = true;
 
 	public int health = 100;
+	public int damage = 20;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -65,10 +67,9 @@ public partial class player : CharacterBody2D
 	public void EnemyAttack() {
 		if(en_range && en_attack_cooldown == true) {
 			timer = GetNode<Timer>("Cooldown");
-			health = health - 20;
+			health = health - damage;
 			en_attack_cooldown = false;
 			timer.Start();
-			GD.Print("damage");
 		}
 	}
 
@@ -84,7 +85,6 @@ public partial class player : CharacterBody2D
 		if(body.HasMethod("Enemy")) {
 			en_range = false;
 		}
-		
 	}
 	
 	private void _on_cooldown_timeout()

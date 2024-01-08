@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnbcijkqupkso"]
+
+[ext_resource type="Script" path="res://Script/Player/tiro_attack.cs" id="1_a2xre"]
+[ext_resource type="Texture2D" uid="uid://cb0t3gg7rldga" path="res://Sword Slashes/Blue Slash Wide/File1.png" id="1_yqal6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpeln"]
+size = Vector2(76, 72)
+
+[node name="TiroAttack" type="Area2D"]
+script = ExtResource("1_a2xre")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(0.156364, 0.2)
+texture = ExtResource("1_yqal6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_tpeln")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

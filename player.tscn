@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://c0gwl18jory4c"]
+[gd_scene load_steps=43 format=3 uid="uid://c0gwl18jory4c"]
 
 [ext_resource type="Script" path="res://Script/Player/player.cs" id="1_krmnc"]
 [ext_resource type="Texture2D" uid="uid://c3yexyffefxwc" path="res://sprites/characters/Jotem_idle.png" id="2_2qamq"]
 [ext_resource type="Texture2D" uid="uid://cx5vtue7j5kyk" path="res://sprites/characters/Jotem_run.png" id="2_7114m"]
 [ext_resource type="Texture2D" uid="uid://cbo26dcpeh7rk" path="res://sprites/characters/Jotem attack.png" id="2_mkyw8"]
 [ext_resource type="Theme" uid="uid://c2t7d0ur3rude" path="res://Script/Health/theme.tres" id="4_gbypa"]
+[ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="6_gpmhs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mytkk"]
 radius = 16.0
@@ -196,8 +197,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -318,6 +317,8 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip3n1"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.933333)
 border_color = Color(1, 1, 1, 1)
@@ -326,7 +327,7 @@ border_color = Color(1, 1, 1, 1)
 bg_color = Color(0.772549, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
-radius = 24.0
+radius = 28.0179
 
 [sub_resource type="LabelSettings" id="LabelSettings_gmtph"]
 font_size = 25
@@ -345,6 +346,9 @@ sprite_frames = SubResource("SpriteFrames_bobyo")
 animation = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_med7w")
+}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -431,6 +435,7 @@ offset_left = -56.0
 offset_top = -320.0
 offset_right = 56.0
 offset_bottom = -282.0
+theme_override_fonts/font = ExtResource("6_gpmhs")
 text = "5:00"
 label_settings = SubResource("LabelSettings_gmtph")
 horizontal_alignment = 1
