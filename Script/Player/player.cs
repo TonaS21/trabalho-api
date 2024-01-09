@@ -27,7 +27,7 @@ public partial class player : CharacterBody2D
 		Vector2 velocity = Velocity;
 		Velocity = velocity;
 		
-		Health = GetNode<ProgressBar>("ProgressBar");
+		Health = GetNode<ProgressBar>("Health");
 		Health.Value = health;
 		
 		if(health <= 0) {
@@ -94,31 +94,5 @@ public partial class player : CharacterBody2D
 	
 	public void Player() { }
 
-	public int seconds = 0;
-	public int min = 0;
-	public int Dseconds = 00;
-	public int Dmin = 5;
-
-	public override void _Ready()
-	{
-		TimerReset();
-	}
-	
-	private void _on_game_timer_timeout()
-	{
-		if(seconds == 0) {
-			if(min > 0) {
-				min -= 1;
-				seconds = 60;
-			}
-		}
-		seconds -= 1;
-		var Label = GetNode<Label>("Time");
-		Label.Text = min.ToString() + ":" + seconds.ToString();
-	}
-
-	public void TimerReset() {
-		seconds = Dseconds;
-		min = Dmin;
-	}
+	public override void _Ready() { }
 }
