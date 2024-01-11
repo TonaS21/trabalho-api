@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c0gwl18jory4c"]
+[gd_scene load_steps=41 format=3 uid="uid://c0gwl18jory4c"]
 
 [ext_resource type="Script" path="res://Script/Player/player.cs" id="1_krmnc"]
 [ext_resource type="Texture2D" uid="uid://c3yexyffefxwc" path="res://sprites/characters/Jotem_idle.png" id="2_2qamq"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cbo26dcpeh7rk" path="res://sprites/characters/Jotem attack.png" id="2_mkyw8"]
 [ext_resource type="Theme" uid="uid://c2t7d0ur3rude" path="res://Script/Health/theme.tres" id="4_gbypa"]
 [ext_resource type="PackedScene" uid="uid://bkquivabmtnor" path="res://hud.tscn" id="5_i244n"]
-[ext_resource type="PackedScene" uid="uid://cnbcijkqupkso" path="res://tiro_attack.tscn" id="7_swdqo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mytkk"]
 radius = 16.0
@@ -422,9 +421,6 @@ theme = ExtResource("4_gbypa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y0mho")
 value = 10.0
 show_percentage = false
-
-[node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
-visible = false
 
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]

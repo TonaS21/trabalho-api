@@ -13,9 +13,14 @@ public partial class player : CharacterBody2D
 	public bool en_range = false;
 	public bool en_attack_cooldown = true;
 	public bool playerAlive = true;
+	public PackedScene SwordSlash = GD.Load<PackedScene>("res://tiro_attack.tscn");
 
 	public int health = 100;
 	public int damage = 20;
+
+	public Vector2 mousePos;
+	public Vector2 pos;
+	public Vector2 direction;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
