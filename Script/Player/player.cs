@@ -1,5 +1,4 @@
 using Godot;
-using GodotPlugins.Game;
 using System;
 
 public partial class player : CharacterBody2D
@@ -17,10 +16,6 @@ public partial class player : CharacterBody2D
 
 	public int health = 100;
 	public int damage = 20;
-
-	public Vector2 mousePos;
-	public Vector2 pos;
-	public Vector2 direction;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -78,22 +73,16 @@ public partial class player : CharacterBody2D
 		}
 	}
 
-	public void TiroAttack() {
-		if(Input.IsActionJustPressed("attack")) {
-			
-		}
-	}
-
 	private void _on_player_hit_box_body_entered(Node2D body)
 	{
-		if(body.HasMethod("Enemy")) {
+		if(body.HasMethod("Enemy") || body.HasMethod("Enemy2")) {
 			en_range = true;
 		}
 	}
 	
 	private void _on_player_hit_box_body_exited(Node2D body)
 	{
-		if(body.HasMethod("Enemy")) {
+		if(body.HasMethod("Enemy") || body.HasMethod("Enemy2")) {
 			en_range = false;
 		}
 	}

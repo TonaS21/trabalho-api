@@ -59,5 +59,5 @@ public partial class enemy_2 : CharacterBody2D
 		}
 	}
 
-	public void Enemy() { }
+	public void Enemy2() { }
 }

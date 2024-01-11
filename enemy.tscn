@@ -190,8 +190,9 @@ _data = {
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k1tnw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0722n"]
-radius = 34.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vgsj"]
+radius = 16.0
+height = 63.9983
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
@@ -218,7 +219,9 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="EnemyHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
-shape = SubResource("CircleShape2D_0722n")
+position = Vector2(-1.35525e-20, -2.11758e-22)
+rotation = -1.57805
+shape = SubResource("CapsuleShape2D_4vgsj")
 
 [connection signal="body_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_entered"]
 [connection signal="body_exited" from="EnemyHitBox" to="." method="_on_enemy_hit_box_body_exited"]

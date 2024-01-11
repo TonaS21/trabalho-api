@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c0gwl18jory4c"]
+[gd_scene load_steps=42 format=3 uid="uid://c0gwl18jory4c"]
 
 [ext_resource type="Script" path="res://Script/Player/player.cs" id="1_krmnc"]
 [ext_resource type="Texture2D" uid="uid://c3yexyffefxwc" path="res://sprites/characters/Jotem_idle.png" id="2_2qamq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cbo26dcpeh7rk" path="res://sprites/characters/Jotem attack.png" id="2_mkyw8"]
 [ext_resource type="Theme" uid="uid://c2t7d0ur3rude" path="res://Script/Health/theme.tres" id="4_gbypa"]
 [ext_resource type="PackedScene" uid="uid://bkquivabmtnor" path="res://hud.tscn" id="5_i244n"]
+[ext_resource type="PackedScene" uid="uid://cnbcijkqupkso" path="res://tiro_attack.tscn" id="7_swdqo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mytkk"]
 radius = 16.0
@@ -320,7 +321,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
-radius = 28.0179
+radius = 32.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mho"]
 bg_color = Color(0.796078, 0.0352941, 0, 1)
@@ -348,10 +349,6 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_left = -5600
-limit_top = -2945
-limit_right = 5775
-limit_bottom = 3425
 
 [node name="HUD" parent="Camera2D" instance=ExtResource("5_i244n")]
 position = Vector2(-576, -320)
@@ -421,6 +418,9 @@ theme = ExtResource("4_gbypa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y0mho")
 value = 10.0
 show_percentage = false
+
+[node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
+visible = false
 
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
