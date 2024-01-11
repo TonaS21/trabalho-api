@@ -73,6 +73,12 @@ public partial class player : CharacterBody2D
 		}
 	}
 
+	public void TiroAttack() {
+		if(Input.IsActionJustPressed("attack")) {
+			
+		}
+	}
+
 	private void _on_player_hit_box_body_entered(Node2D body)
 	{
 		if(body.HasMethod("Enemy")) {
