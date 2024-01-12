@@ -423,6 +423,7 @@ value = 10.0
 show_percentage = false
 
 [node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
+visible = false
 
 [node name="TiroCooldown" type="Timer" parent="."]
 
