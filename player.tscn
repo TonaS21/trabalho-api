@@ -198,8 +198,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -320,8 +318,10 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
-radius = 32.0
+radius = 24.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mho"]
 bg_color = Color(0.796078, 0.0352941, 0, 1)
@@ -340,6 +340,9 @@ sprite_frames = SubResource("SpriteFrames_bobyo")
 animation = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_med7w")
+}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -420,8 +423,10 @@ value = 10.0
 show_percentage = false
 
 [node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
-visible = false
+
+[node name="TiroCooldown" type="Timer" parent="."]
 
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="TiroCooldown" to="." method="_on_tiro_cooldown_timeout"]

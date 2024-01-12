@@ -15,7 +15,13 @@ public partial class player : CharacterBody2D
 	public PackedScene SwordSlash = GD.Load<PackedScene>("res://tiro_attack.tscn");
 
 	public int health = 100;
-	public int damage = 20;
+	public int damage = 0;
+
+	public Vector2 mousePos;
+	public Vector2 pos;
+	public Vector2 direction;
+	public bool pl_attack_cooldown = true;
+	public int tirodamage = 100;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -39,6 +45,7 @@ public partial class player : CharacterBody2D
 		Movement();
 		Animations();
 		EnemyAttack();
+		TiroAttack();
 		MoveAndSlide();
 	}
 	
@@ -61,6 +68,20 @@ public partial class player : CharacterBody2D
 			animationPlayer.Play("Run");
 		} else if(Input.IsActionPressed("down")) {
 			animationPlayer.Play("Run");
+		}
+	}
+
+	public void TiroAttack() {
+		if(Input.IsActionJustPressed("attack") && pl_attack_cooldown == true) {
+			var tiro = SwordSlash.Instantiate<tiro_attack>();
+			mousePos = GetGlobalMousePosition();
+			tiro.Position = Position + Position.DirectionTo(mousePos);
+			tiro.direction = Position.DirectionTo(mousePos);
+			tiro.velocity = 10;
+			AddSibling(tiro);
+			GD.Print(pos);
+			tiro.Visible = true;
+			pl_attack_cooldown = false;
 		}
 	}
 	
@@ -92,7 +113,13 @@ public partial class player : CharacterBody2D
 		en_attack_cooldown = true;
 	}
 	
+	private void _on_tiro_cooldown_timeout()
+	{
+		pl_attack_cooldown = true;
+	}
+	
 	public void Player() { }
 
 	public override void _Ready() { }
 }
+
