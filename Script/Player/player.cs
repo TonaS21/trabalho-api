@@ -15,13 +15,13 @@ public partial class player : CharacterBody2D
 	public PackedScene SwordSlash = GD.Load<PackedScene>("res://tiro_attack.tscn");
 
 	public int health = 100;
-	public int damage = 0;
+	public int damage;
 
 	public Vector2 mousePos;
 	public Vector2 pos;
 	public Vector2 direction;
-	public bool pl_attack_cooldown = true;
-	public int tirodamage = 100;
+	public bool pl_tiroattack_cooldown = true;
+	public int tirodamage = 10;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -36,12 +36,6 @@ public partial class player : CharacterBody2D
 		Health = GetNode<ProgressBar>("Health");
 		Health.Value = health;
 		
-		if(health <= 0) {
-			playerAlive = false;
-			health = 0;
-			GetTree().ChangeSceneToFile("res://game_over.tscn");
-		}
-
 		Movement();
 		Animations();
 		EnemyAttack();
@@ -53,7 +47,7 @@ public partial class player : CharacterBody2D
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		
 		//Estar parado
-		if (!Input.IsAnythingPressed() && (Input.IsActionJustReleased("right") || Input.IsActionJustReleased("left") || Input.IsActionJustReleased("up") || Input.IsActionJustReleased("down"))) {
+		if (!Input.IsAnythingPressed()) {
 			animationPlayer.Play("Idle");
 		}
 		
@@ -72,7 +66,7 @@ public partial class player : CharacterBody2D
 	}
 
 	public void TiroAttack() {
-		if(Input.IsActionJustPressed("attack") && pl_attack_cooldown == true) {
+		if(Input.IsActionJustPressed("tiroattack") && pl_tiroattack_cooldown == true) {
 			var tiro = SwordSlash.Instantiate<tiro_attack>();
 			mousePos = GetGlobalMousePosition();
 			tiro.Position = Position + Position.DirectionTo(mousePos);
@@ -81,29 +75,40 @@ public partial class player : CharacterBody2D
 			AddSibling(tiro);
 			GD.Print(pos);
 			tiro.Visible = true;
-			pl_attack_cooldown = false;
+			pl_tiroattack_cooldown = false;
 		}
 	}
-	
+
 	public void EnemyAttack() {
 		if(en_range && en_attack_cooldown == true) {
 			timer = GetNode<Timer>("Cooldown");
-			health = health - damage;
-			en_attack_cooldown = false;
-			timer.Start();
+			if(health - damage > 0) {
+				health = health - damage;
+				en_attack_cooldown = false;
+				timer.Start();
+			} else {
+				health = 0;
+				playerAlive = false;
+				GetTree().ChangeSceneToFile("res://game_over.tscn");
+			}
 		}
 	}
 
 	private void _on_player_hit_box_body_entered(Node2D body)
 	{
-		if(body.HasMethod("Enemy") || body.HasMethod("Enemy2")) {
+
+		if(body.Name == "Enemy") {
+			damage = 10;
+			en_range = true;
+		} else if (body.Name == "Enemy2") {
+			damage = 20;
 			en_range = true;
 		}
 	}
 	
 	private void _on_player_hit_box_body_exited(Node2D body)
 	{
-		if(body.HasMethod("Enemy") || body.HasMethod("Enemy2")) {
+		if(body.Name == "Enemy" || body.Name == "Enemy2") {
 			en_range = false;
 		}
 	}
@@ -115,11 +120,9 @@ public partial class player : CharacterBody2D
 	
 	private void _on_tiro_cooldown_timeout()
 	{
-		pl_attack_cooldown = true;
+		pl_tiroattack_cooldown = true;
 	}
 	
-	public void Player() { }
-
 	public override void _Ready() { }
 }
 

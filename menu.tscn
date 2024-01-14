@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhpodaiuc85sd"]
+[gd_scene load_steps=7 format=3 uid="uid://bhpodaiuc85sd"]
 
 [ext_resource type="Script" path="res://Script/Menu/Menu.cs" id="1_4b2em"]
 [ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="3_60pc1"]
+[ext_resource type="AudioStream" uid="uid://hwfb0awjav6p" path="res://assets/Runaway.mp3" id="4_e2biu"]
 [ext_resource type="PackedScene" uid="uid://d0ykbch4hedjy" path="res://bg.tscn" id="5_m4diu"]
 
 [sub_resource type="FontVariation" id="FontVariation_knjja"]
@@ -51,6 +52,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Bg" parent="." instance=ExtResource("5_m4diu")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_e2biu")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="New Game" to="." method="_on_new_game_pressed"]
