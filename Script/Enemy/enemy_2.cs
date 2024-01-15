@@ -14,7 +14,7 @@ public partial class enemy_2 : CharacterBody2D
 	
 	bool player_in_att_zone = false; 
 	public bool en_attack_cooldown = true;
-	public int enHealth = 20;
+	public int enHealth = 25;
 	player Player = new player();
 	
 	public override void _PhysicsProcess(double delta)
@@ -33,10 +33,10 @@ public partial class enemy_2 : CharacterBody2D
 			animationPlayer.Play("Run");
 			if(velocity.X < 0) {
 				animationPlayer.Play("Run");
-				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
+				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
 			} else if (velocity.X > 0) {
 				animationPlayer.Play("Run");
-				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
+				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
 			}
 		} else {
 			animationPlayer.Play("Idle");
@@ -62,4 +62,36 @@ public partial class enemy_2 : CharacterBody2D
 			player_in_att_zone = false;
 		}
 	}
+
+	private void _on_enemy_hit_box_area_entered(Area2D area)
+	{
+		if(area.Name == "SwordArea2D") {
+			OnDamage();
+			GD.Print("dano");
+		}
+	}
+
+	private void SpawnCoin()
+	{
+		var scene = GD.Load<PackedScene>("res://coin.tscn");
+		var coin = scene.Instantiate<coin>();
+		AddChild(coin);
+		coin.Position = Position;
+	}
+
+	public void OnDamage() {
+		if(enHealth - Player.swordDamage > 0) {
+			enHealth -= Player.swordDamage;
+		} else {
+			OnEnemyDeath();
+		}
+	}
+
+	private void OnEnemyDeath()
+	{
+		enHealth = 0;
+		SpawnCoin();
+		QueueFree();
+	}
 }
+

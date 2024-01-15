@@ -18,7 +18,7 @@ public partial class coin : Area2D
 	{
  		if(body.Name == "Player")
 		{
-			EmitSignal("CoinCollected");
+			//EmitSignal("CoinCollected");
 			QueueFree();
 		}
 	}

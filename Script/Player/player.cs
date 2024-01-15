@@ -21,7 +21,7 @@ public partial class player : CharacterBody2D
 	public Vector2 pos;
 	public Vector2 direction;
 	public bool pl_tiroattack_cooldown = true;
-	public int tirodamage = 10;
+	public int swordDamage = 10;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -47,21 +47,23 @@ public partial class player : CharacterBody2D
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		
 		//Estar parado
-		if (!Input.IsAnythingPressed()) {
+		if (!Input.IsAnythingPressed() && animationPlayer.CurrentAnimation != "Attack1") {
 			animationPlayer.Play("Idle");
 		}
 		
 		//Correr
-		if (Input.IsActionPressed("right")) {
+		if (Input.IsActionPressed("right") && animationPlayer.CurrentAnimation != "Attack1") {
 			animationPlayer.Play("Run");
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
-		} else if(Input.IsActionPressed("left")) {
+		} else if(Input.IsActionPressed("left") && animationPlayer.CurrentAnimation != "Attack1") {
 			animationPlayer.Play("Run");
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
-		} else if(Input.IsActionPressed("up")) {
+		} else if(Input.IsActionPressed("up") && animationPlayer.CurrentAnimation != "Attack1") {
 			animationPlayer.Play("Run");
-		} else if(Input.IsActionPressed("down")) {
+		} else if(Input.IsActionPressed("down") && animationPlayer.CurrentAnimation != "Attack1") {
 			animationPlayer.Play("Run");
+		} else if(Input.IsActionPressed("attack")) {
+			animationPlayer.Play("Attack1");
 		}
 	}
 
@@ -111,6 +113,11 @@ public partial class player : CharacterBody2D
 		if(body.Name == "Enemy" || body.Name == "Enemy2") {
 			en_range = false;
 		}
+	}
+	
+	private void _on_sword_area_2d_body_entered(Node2D body)
+	{
+	
 	}
 	
 	private void _on_cooldown_timeout()
