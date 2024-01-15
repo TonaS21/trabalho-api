@@ -421,7 +421,7 @@ _data = {
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
-radius = 24.0
+radius = 28.0179
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ermv6"]
 bg_color = Color(0.247059, 0.247059, 0.247059, 1)
@@ -539,11 +539,7 @@ show_percentage = false
 [node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
 visible = false
 
-[node name="TiroCooldown" type="Timer" parent="."]
-wait_time = 1.5
-
 [connection signal="body_entered" from="AnimatedSprite2D/SwordArea2D" to="." method="_on_sword_area_2d_body_entered"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
-[connection signal="timeout" from="TiroCooldown" to="." method="_on_tiro_cooldown_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dn1afiby36bqj"]
+[gd_scene load_steps=18 format=3 uid="uid://dn1afiby36bqj"]
 
 [ext_resource type="Script" path="res://Script/Enemy/coin.cs" id="1_lg7v1"]
 [ext_resource type="Texture2D" uid="uid://gamcurijlcag" path="res://sprites/Coin/Coin-1.png.png" id="1_q45sj"]
@@ -40,6 +40,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_bv4va"]
 resource_name = "Coin"
+length = 0.65
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -100,15 +101,76 @@ _data = {
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mxvvk"]
 
+[sub_resource type="Animation" id="Animation_uyr3w"]
+resource_name = "Coin"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Coin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_gq272"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Coin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fci37"]
+_data = {
+"Coin": SubResource("Animation_uyr3w"),
+"RESET": SubResource("Animation_gq272")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxbpi"]
-radius = 10.0499
+radius = 14.0357
 
 [node name="Coin" type="Area2D"]
 script = ExtResource("1_lg7v1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.38419e-07, 4.76837e-07)
-scale = Vector2(0.0371875, 0.03625)
+position = Vector2(7.15256e-07, -0.5)
+scale = Vector2(0.0525, 0.04875)
 sprite_frames = SubResource("SpriteFrames_uakv2")
 animation = &"Coin"
 
@@ -120,8 +182,15 @@ tree_root = SubResource("AnimationNodeStateMachine_mxvvk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_fci37")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sxbpi")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

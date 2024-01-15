@@ -193,9 +193,9 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vgsj"]
 radius = 15.9851
-height = 71.9981
+height = 74.0271
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_qkttq")
 
@@ -226,8 +226,6 @@ anim_player = NodePath("../AnimationPlayer")
 position = Vector2(-1.35525e-20, -2.11758e-22)
 rotation = -1.57805
 shape = SubResource("CapsuleShape2D_4vgsj")
-
-[node name="Cooldown" type="Timer" parent="."]
 
 [node name="Coin" parent="." instance=ExtResource("4_p1buc")]
 visible = false

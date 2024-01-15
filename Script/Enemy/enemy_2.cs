@@ -66,25 +66,28 @@ public partial class enemy_2 : CharacterBody2D
 	private void _on_enemy_hit_box_area_entered(Area2D area)
 	{
 		if(area.Name == "SwordArea2D") {
-			OnDamage();
-			GD.Print("dano");
+			if(enHealth - Player.swordDamage > 0) {
+				enHealth -= Player.swordDamage;
+			} else {
+				OnEnemyDeath();
+			}
+		}
+		
+		if(area.Name == "TiroAttack") {
+			if(enHealth - Player.tiroDamage > 0) {
+				enHealth -= Player.tiroDamage;
+			} else {
+				OnEnemyDeath();
+			}
 		}
 	}
 
 	private void SpawnCoin()
 	{
 		var scene = GD.Load<PackedScene>("res://coin.tscn");
-		var coin = scene.Instantiate<coin>();
-		AddChild(coin);
-		coin.Position = Position;
-	}
-
-	public void OnDamage() {
-		if(enHealth - Player.swordDamage > 0) {
-			enHealth -= Player.swordDamage;
-		} else {
-			OnEnemyDeath();
-		}
+		var Coin = scene.Instantiate<coin>();
+		AddSibling(Coin);
+		Coin.Position = Position;
 	}
 
 	private void OnEnemyDeath()
@@ -94,4 +97,3 @@ public partial class enemy_2 : CharacterBody2D
 		QueueFree();
 	}
 }
-

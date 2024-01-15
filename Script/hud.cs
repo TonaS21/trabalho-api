@@ -7,6 +7,9 @@ public partial class hud : Node2D
 	public int min = 0;
 	public int Dseconds = 00;
 	public int Dmin = 5;
+
+	public int CoinsCollected = 0;
+	public int CoinValue = 1;
 	
 	public override void _Process(double delta)
 	{
@@ -27,11 +30,22 @@ public partial class hud : Node2D
 		}
 		seconds -= 1;
 		var Label = GetNode<Label>("Time");
-		Label.Text = min.ToString() + ":" + seconds.ToString();
+		if (seconds < 10) {
+			Label.Text = min.ToString() + ":" + "0" + seconds.ToString();
+		} else {
+			Label.Text = min.ToString() + ":" + seconds.ToString();
+		}
+		
 	}
 	
 	public void TimerReset() {
 		seconds = Dseconds;
 		min = Dmin;
+	}
+
+	public void Coinsss() {
+		var oin = GD.Load<PackedScene>("res://coin.tscn");
+		CoinsCollected += CoinValue;
+		
 	}
 }

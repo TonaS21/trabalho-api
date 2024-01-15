@@ -3,23 +3,33 @@ using System;
 
 public partial class coin : Area2D
 {
+	AnimationPlayer animationPlayer;
+	
 	public delegate void CoinCollected();
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	Signal coin_collected;
+
 	public override void _Process(double delta)
 	{
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("Coin");
 	}
 	
 	private void _on_body_entered(CharacterBody2D body)
 	{
  		if(body.Name == "Player")
 		{
-			//EmitSignal("CoinCollected");
+			//EmitSignal("coin_collected");
 			QueueFree();
 		}
+	}
+	
+	private void _on_timer_timeout()
+	{
+		QueueFree();
 	}
 }

@@ -22,6 +22,7 @@ public partial class player : CharacterBody2D
 	public Vector2 direction;
 	public bool pl_tiroattack_cooldown = true;
 	public int swordDamage = 10;
+	public int tiroDamage = 5;
 
 	public void Movement() {
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
@@ -67,17 +68,19 @@ public partial class player : CharacterBody2D
 		}
 	}
 
-	public void TiroAttack() {
+	public async void TiroAttack() {
 		if(Input.IsActionJustPressed("tiroattack") && pl_tiroattack_cooldown == true) {
+			pl_tiroattack_cooldown = false;
 			var tiro = SwordSlash.Instantiate<tiro_attack>();
 			mousePos = GetGlobalMousePosition();
 			tiro.Position = Position + Position.DirectionTo(mousePos);
 			tiro.direction = Position.DirectionTo(mousePos);
 			tiro.velocity = 10;
 			AddSibling(tiro);
-			GD.Print(pos);
+			//GD.Print(pos);
 			tiro.Visible = true;
-			pl_tiroattack_cooldown = false;
+			await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
+			pl_tiroattack_cooldown = true;
 		}
 	}
 
@@ -115,19 +118,14 @@ public partial class player : CharacterBody2D
 		}
 	}
 	
-	private void _on_sword_area_2d_body_entered(Node2D body)
-	{
-	
-	}
+	//private void _on_sword_area_2d_body_entered(Node2D body)
+	//{
+	//
+	//}
 	
 	private void _on_cooldown_timeout()
 	{
 		en_attack_cooldown = true;
-	}
-	
-	private void _on_tiro_cooldown_timeout()
-	{
-		pl_tiroattack_cooldown = true;
 	}
 	
 	public override void _Ready() { }
