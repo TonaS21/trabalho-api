@@ -470,52 +470,52 @@ libraries = {
 position = Vector2(-576, -320)
 
 [node name="Position1" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-576, -324)
+position = Vector2(-566, -315)
 
 [node name="Position2" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-283, -324)
+position = Vector2(-283, -314)
 
 [node name="Position3" type="Marker2D" parent="Camera2D" groups=["spawn"]]
 position = Vector2(0, -324)
 
 [node name="Position4" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(283, -324)
+position = Vector2(283, -314)
 
 [node name="Position5" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(576, -324)
+position = Vector2(566, -314)
 
 [node name="Position6" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(576, -162)
+position = Vector2(566, -162)
 
 [node name="Position7" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(576, 0)
+position = Vector2(566, 0)
 
 [node name="Position8" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(576, 162)
+position = Vector2(566, 162)
 
 [node name="Position9" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(576, 324)
+position = Vector2(566, 314)
 
 [node name="Position10" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(283, 324)
+position = Vector2(283, 314)
 
 [node name="Position11" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(0, 324)
+position = Vector2(0, 314)
 
 [node name="Position12" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-283, 324)
+position = Vector2(-283, 314)
 
 [node name="Position13" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-576, 324)
+position = Vector2(-566, 314)
 
 [node name="Position14" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-576, 162)
+position = Vector2(-566, 162)
 
 [node name="Position15" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-576, 0)
+position = Vector2(-566, 0)
 
 [node name="Position16" type="Marker2D" parent="Camera2D" groups=["spawn"]]
-position = Vector2(-576, -162)
+position = Vector2(-566, -162)
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
 

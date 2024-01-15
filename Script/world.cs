@@ -14,16 +14,18 @@ public partial class world : Node2D
 
 	private void _on_spawn_timer_timeout()
 	{
-		var scene = GD.Load<PackedScene>("res://enemy.tscn");
-		var enemy1 = scene.Instantiate<CharacterBody2D>();
-		AddChild(enemy1);
+		var ran = new Random();
 
-		var ran = new RandomNumberGenerator();
+		var enemy1 = GD.Load<PackedScene>("res://enemy.tscn");
+		var enemy2 = GD.Load<PackedScene>("res://enemy_2.tscn");
+		PackedScene[] mobs = {enemy1, enemy2};
+		var enemies = mobs[ran.Next(0, 2)].Instantiate<CharacterBody2D>();
+		AddChild(enemies);
 
 		SpawnLocation = GetNode<Node2D>("SpawnLocation");
-		enemy1.Position = SpawnLocation.Position;
+		enemies.Position = SpawnLocation.Position;
 		var nodes = GetTree().GetNodesInGroup("spawn");
-		var node = nodes[(int) ran.Randi() % nodes.Count] as Marker2D;
+		var node = nodes[(int) ran.Next(0, nodes.Count - 1) ] as Marker2D;
 		var position = node.Position;
 		SpawnLocation.Position = position;
 	}
