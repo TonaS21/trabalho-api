@@ -99,9 +99,8 @@ public partial class player : CharacterBody2D
 		}
 	}
 
-	private void _on_player_hit_box_body_entered(Node2D body)
+	private void _on_player_hit_box_body_entered(CharacterBody2D body)
 	{
-
 		if(body.Name == "Enemy") {
 			damage = 10;
 			en_range = true;
@@ -111,7 +110,7 @@ public partial class player : CharacterBody2D
 		}
 	}
 	
-	private void _on_player_hit_box_body_exited(Node2D body)
+	private void _on_player_hit_box_body_exited(CharacterBody2D body)
 	{
 		if(body.Name == "Enemy" || body.Name == "Enemy2") {
 			en_range = false;
