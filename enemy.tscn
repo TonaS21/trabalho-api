@@ -1,11 +1,40 @@
-[gd_scene load_steps=23 format=3 uid="uid://ch8ps2838cm12"]
+[gd_scene load_steps=31 format=3 uid="uid://ch8ps2838cm12"]
 
 [ext_resource type="Script" path="res://Script/Enemy/enemy.cs" id="1_qkttq"]
 [ext_resource type="Texture2D" uid="uid://dqgi2qogs6ogb" path="res://sprites/characters/Massacre_idle.png" id="2_3iesj"]
+[ext_resource type="Texture2D" uid="uid://b8ebm8bbvh40q" path="res://sprites/characters/Massacre death.png" id="2_mjust"]
 [ext_resource type="Texture2D" uid="uid://dxcgsror07vte" path="res://sprites/characters/Massacre run.png" id="3_hcwhe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx1d8"]
 size = Vector2(56, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n24ed"]
+atlas = ExtResource("2_mjust")
+region = Rect2(0, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1lwn"]
+atlas = ExtResource("2_mjust")
+region = Rect2(64, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usxc2"]
+atlas = ExtResource("2_mjust")
+region = Rect2(128, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snei1"]
+atlas = ExtResource("2_mjust")
+region = Rect2(192, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr0td"]
+atlas = ExtResource("2_mjust")
+region = Rect2(256, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0rwg"]
+atlas = ExtResource("2_mjust")
+region = Rect2(320, 0, 64, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r7mo"]
+atlas = ExtResource("2_mjust")
+region = Rect2(384, 0, 64, 31)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eos8a"]
 atlas = ExtResource("2_3iesj")
@@ -53,6 +82,32 @@ region = Rect2(256, 0, 64, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k02g3"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n24ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1lwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usxc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snei1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr0td")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0rwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r7mo")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eos8a")
