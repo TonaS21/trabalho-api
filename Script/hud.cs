@@ -7,13 +7,12 @@ public partial class hud : Node2D
 	public int min = 0;
 	public int Dseconds = 00;
 	public int Dmin = 5;
+	public int coinsCollected = 0;
 
-	coin Coin = new coin();
-	
+	public int CoinsValue = 1;
+
 	public override void _Process(double delta)
 	{
-		var Label1 = GetNode<Label>("Moedas");
-		Label1.Text = Coin.coinsCollected.ToString() + " Coins";
 	}
 	
 	public override void _Ready()
@@ -36,11 +35,17 @@ public partial class hud : Node2D
 		} else {
 			Label.Text = min.ToString() + ":" + seconds.ToString();
 		}
-		
+
 	}
 	
 	public void TimerReset() {
 		seconds = Dseconds;
 		min = Dmin;
+	}
+
+	public void addCoin() {
+		coinsCollected += CoinsValue;
+		var coinsDisplay = GetNode<Label>("Moedas");
+		coinsDisplay.Text = coinsCollected + " coins";
 	}
 }

@@ -38,8 +38,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mxvvk"]
-
 [sub_resource type="Animation" id="Animation_uyr3w"]
 resource_name = "Coin"
 length = 0.65
@@ -101,10 +99,12 @@ _data = {
 "RESET": SubResource("Animation_gq272")
 }
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mxvvk"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxbpi"]
 radius = 14.0357
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" groups=["coin"]]
 script = ExtResource("1_lg7v1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -114,6 +114,10 @@ sprite_frames = SubResource("SpriteFrames_uakv2")
 animation = &"Coin"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_fci37")
+}
 tree_root = SubResource("AnimationNodeStateMachine_mxvvk")
 anim_player = NodePath("../AnimationPlayer")
 

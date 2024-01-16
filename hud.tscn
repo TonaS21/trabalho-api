@@ -36,7 +36,7 @@ offset_left = 976.0
 offset_top = 592.0
 offset_right = 1090.0
 offset_bottom = 631.0
-text = "0 coins"
+text = "0 Coins"
 label_settings = SubResource("LabelSettings_haa5r")
 horizontal_alignment = 1
 

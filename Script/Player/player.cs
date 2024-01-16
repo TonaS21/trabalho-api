@@ -20,6 +20,7 @@ public partial class player : CharacterBody2D
 	public Vector2 mousePos;
 	public Vector2 pos;
 	public Vector2 direction;
+	
 	public bool pl_tiroattack_cooldown = true;
 	public int swordDamage = 10;
 	public int tiroDamage = 5;
@@ -77,7 +78,6 @@ public partial class player : CharacterBody2D
 			tiro.direction = Position.DirectionTo(mousePos);
 			tiro.velocity = 10;
 			AddSibling(tiro);
-			//GD.Print(pos);
 			tiro.Visible = true;
 			await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
 			pl_tiroattack_cooldown = true;
@@ -101,18 +101,31 @@ public partial class player : CharacterBody2D
 
 	private void _on_player_hit_box_body_entered(CharacterBody2D body)
 	{
-		if(body.Name == "Enemy") {
+		if(body.IsInGroup("enemy")) {
 			damage = 10;
 			en_range = true;
-		} else if (body.Name == "Enemy2") {
+		} else if (body.IsInGroup("enemy2")) {
 			damage = 20;
 			en_range = true;
 		}
 	}
 	
+	private void _on_player_hit_box_area_entered(Area2D area)
+	{
+		if (area.IsInGroup("coin")) {
+			if (health <= 95) {
+				health = health + 5;
+				GD.Print("+ vida");
+			} else {
+				health = 100;
+				GD.Print("não");
+			}
+		}
+	}	
+	
 	private void _on_player_hit_box_body_exited(CharacterBody2D body)
 	{
-		if(body.Name == "Enemy" || body.Name == "Enemy2") {
+		if(body.IsInGroup("enemy") || body.IsInGroup("enemy2")) {
 			en_range = false;
 		}
 	}
@@ -129,3 +142,4 @@ public partial class player : CharacterBody2D
 	
 	public override void _Ready() { }
 }
+

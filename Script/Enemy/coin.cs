@@ -4,7 +4,6 @@ using System;
 public partial class coin : Area2D
 {
 	AnimationPlayer animationPlayer;
-	public int coinsCollected = 0;
 
 	public override void _Ready()
 	{
@@ -15,13 +14,13 @@ public partial class coin : Area2D
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("Coin");
 	}
-	
+
 	private void _on_body_entered(CharacterBody2D body)
 	{
- 		if(body.Name == "Player")
+ 		if(body.IsInGroup("player"))
 		{
-			coinsCollected = coinsCollected + 1;
-			GD.Print(coinsCollected);
+			hud HUD = GetTree().Root.GetNode("World").GetNode("Player").GetNode("Camera2D").GetNode<hud>("HUD");
+			HUD.addCoin();
 			QueueFree();
 		}
 	}

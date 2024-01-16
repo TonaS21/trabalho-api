@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bkquivabmtnor" path="res://hud.tscn" id="5_i244n"]
 [ext_resource type="PackedScene" uid="uid://cnbcijkqupkso" path="res://tiro_attack.tscn" id="7_swdqo"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mytkk"]
-radius = 16.0
-height = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fplmw"]
+radius = 17.0
+height = 56.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7myuw"]
 atlas = ExtResource("2_mkyw8")
@@ -201,8 +201,6 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1b0"]
 radius = 4.02392
 height = 33.9924
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
 
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
@@ -420,8 +418,11 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
-radius = 28.0179
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrrnw"]
+radius = 22.0
+height = 58.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ermv6"]
 bg_color = Color(0.247059, 0.247059, 0.247059, 1)
@@ -429,12 +430,13 @@ bg_color = Color(0.247059, 0.247059, 0.247059, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mho"]
 bg_color = Color(0.796078, 0.0352941, 0, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_krmnc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_mytkk")
+shape = SubResource("CapsuleShape2D_fplmw")
+debug_color = Color(0.901961, 0, 0.764706, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1.90735e-06, -9.53674e-07)
@@ -453,6 +455,9 @@ disabled = true
 debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_med7w")
+}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -517,7 +522,8 @@ position = Vector2(-566, -162)
 [node name="PlayerHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
-shape = SubResource("CircleShape2D_oe1f8")
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_mrrnw")
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
@@ -537,6 +543,7 @@ show_percentage = false
 visible = false
 
 [connection signal="body_entered" from="AnimatedSprite2D/SwordArea2D" to="." method="_on_sword_area_2d_body_entered"]
+[connection signal="area_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_area_entered"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
