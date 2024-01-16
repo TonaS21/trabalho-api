@@ -171,6 +171,7 @@ animations = [{
 radius = 40.0
 
 [node name="Enemy2" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_hks8r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -182,9 +183,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_08b0a")
-}
 tree_root = SubResource("AnimationNodeStateMachine_mtjmr")
 anim_player = NodePath("../AnimationPlayer")
 

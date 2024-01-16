@@ -4,14 +4,11 @@ using System;
 public partial class coin : Area2D
 {
 	AnimationPlayer animationPlayer;
-	
-	public delegate void CoinCollected();
+	public int coinsCollected = 0;
 
 	public override void _Ready()
 	{
 	}
-
-	Signal coin_collected;
 
 	public override void _Process(double delta)
 	{
@@ -23,7 +20,8 @@ public partial class coin : Area2D
 	{
  		if(body.Name == "Player")
 		{
-			//EmitSignal("coin_collected");
+			coinsCollected = coinsCollected + 1;
+			GD.Print(coinsCollected);
 			QueueFree();
 		}
 	}

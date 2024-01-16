@@ -202,6 +202,8 @@ animations = [{
 radius = 4.02392
 height = 33.9924
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -418,8 +420,6 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_oe1f8"]
 radius = 28.0179
 
@@ -453,9 +453,6 @@ disabled = true
 debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_med7w")
-}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 

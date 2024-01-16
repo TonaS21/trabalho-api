@@ -8,11 +8,12 @@ public partial class hud : Node2D
 	public int Dseconds = 00;
 	public int Dmin = 5;
 
-	public int CoinsCollected = 0;
-	public int CoinValue = 1;
+	coin Coin = new coin();
 	
 	public override void _Process(double delta)
 	{
+		var Label1 = GetNode<Label>("Moedas");
+		Label1.Text = Coin.coinsCollected.ToString() + " Coins";
 	}
 	
 	public override void _Ready()
@@ -41,11 +42,5 @@ public partial class hud : Node2D
 	public void TimerReset() {
 		seconds = Dseconds;
 		min = Dmin;
-	}
-
-	public void Coinsss() {
-		var oin = GD.Load<PackedScene>("res://coin.tscn");
-		CoinsCollected += CoinValue;
-		
 	}
 }

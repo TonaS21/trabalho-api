@@ -117,10 +117,10 @@ public partial class player : CharacterBody2D
 		}
 	}
 	
-	//private void _on_sword_area_2d_body_entered(Node2D body)
-	//{
-	//
-	//}
+	private void _on_sword_area_2d_body_entered(Node2D body)
+	{
+	
+	}
 	
 	private void _on_cooldown_timeout()
 	{
@@ -129,4 +129,3 @@ public partial class player : CharacterBody2D
 	
 	public override void _Ready() { }
 }
-
