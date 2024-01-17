@@ -250,6 +250,8 @@ animations = [{
 radius = 4.02392
 height = 33.9924
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -466,8 +468,6 @@ _data = {
 "Run": SubResource("Animation_j0vtg")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrrnw"]
 radius = 22.0
 height = 58.0
@@ -487,6 +487,7 @@ shape = SubResource("CapsuleShape2D_fplmw")
 debug_color = Color(0.901961, 0, 0.764706, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(-1.90735e-06, -9.53674e-07)
 scale = Vector2(1.23557, 1.49108)
 sprite_frames = SubResource("SpriteFrames_bobyo")
@@ -503,9 +504,6 @@ disabled = true
 debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_med7w")
-}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 

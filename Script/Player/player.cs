@@ -79,7 +79,7 @@ public partial class player : CharacterBody2D
 			tiro.velocity = 10;
 			AddSibling(tiro);
 			tiro.Visible = true;
-			await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
+			await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);
 			pl_tiroattack_cooldown = true;
 		}
 	}
