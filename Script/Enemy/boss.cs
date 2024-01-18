@@ -3,7 +3,7 @@ using System;
 
 public partial class boss : CharacterBody2D
 {
-	public float Speed = 75f;
+	public float Speed = 125f;
 
 	Vector2 playerPosition;
 	Vector2 mobPosition = Vector2.Zero;
@@ -36,11 +36,11 @@ public partial class boss : CharacterBody2D
 		Health = GetNode<ProgressBar>("Health");
 		Health.Value = enHealth;
 
-		if (mobPosition.DistanceTo(playerPosition) < 1500 && Speed > 0) {
+		if (mobPosition.DistanceTo(playerPosition) < 150000 && Speed > 0) {
 			velocity = targetPosition;
 			animationPlayer.Play("Run");
 			BossAttack();
-		} else if(mobPosition.DistanceTo(playerPosition) > 1500 && Speed > 0) {
+		} else if(mobPosition.DistanceTo(playerPosition) > 150000 && Speed > 0) {
 			animationPlayer.Play("Run");
 			if(velocity.X < 0) {
 				animationPlayer.Play("Run");

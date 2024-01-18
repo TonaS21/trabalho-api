@@ -123,7 +123,8 @@ public partial class player : CharacterBody2D
 			} else {
 				health = 100;
 			}
-		} else if (area.Name == "BossAttack") {	
+		} else if (area is boss_attack) {	
+			en_range = true;
 			damage = 10;
 		}
 	}	
@@ -135,6 +136,13 @@ public partial class player : CharacterBody2D
 		}
 	}
 	
+	private void _on_player_hit_box_area_exited(Area2D area)
+	{
+		if (area is boss_attack) {	
+			en_range = false;
+		}
+	}
+	
 	private void _on_cooldown_timeout()
 	{
 		en_attack_cooldown = true;
@@ -142,4 +150,5 @@ public partial class player : CharacterBody2D
 	
 	public override void _Ready() { }
 }
+
 

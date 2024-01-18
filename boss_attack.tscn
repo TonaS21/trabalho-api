@@ -21,6 +21,7 @@ position = Vector2(-0.5, 0)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_fycos")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
 
-[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

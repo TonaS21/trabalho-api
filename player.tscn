@@ -250,6 +250,8 @@ animations = [{
 radius = 4.02392
 height = 33.9924
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
+
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
 length = 0.95
@@ -312,6 +314,34 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-9.71212, -8.04786), Vector2(-8.90277, -8.04786), Vector2(-4.04671, -22.1316), Vector2(27.5177, 9.38916), Vector2(-27.5177, 7.3772), Vector2(-27.5177, 7.3772), Vector2(-20.2336, 7.3772), Vector2(27.5177, 7.3772), Vector2(22.6616, -25.4849), Vector2(-9.7, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_hv7k5"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_el8o8"]
@@ -458,34 +488,6 @@ tracks/2/keys = {
 "values": [true, true]
 }
 
-[sub_resource type="Animation" id="Animation_hv7k5"]
-resource_name = "Death"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Death"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_med7w"]
 _data = {
 "Attack1": SubResource("Animation_x6e74"),
@@ -494,8 +496,6 @@ _data = {
 "RESET": SubResource("Animation_b11p3"),
 "Run": SubResource("Animation_j0vtg")
 }
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrrnw"]
 radius = 22.0
@@ -533,9 +533,6 @@ disabled = true
 debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_med7w")
-}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -620,8 +617,8 @@ show_percentage = false
 [node name="TiroAttack" parent="." instance=ExtResource("7_swdqo")]
 visible = false
 
-[connection signal="body_entered" from="AnimatedSprite2D/SwordArea2D" to="." method="_on_sword_area_2d_body_entered"]
 [connection signal="area_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_area_entered"]
+[connection signal="area_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_area_exited"]
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="PlayerHitBox" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

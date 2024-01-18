@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://nalr8mbm1vy4"]
+
+[ext_resource type="Script" path="res://Script/Menu/victory.cs" id="1_bmyfn"]
+[ext_resource type="Texture2D" uid="uid://crrp205x4040t" path="res://assets/desktop-wallpaper-dark-space-minimal-art-chromebook-pixel.jpg" id="2_ltbtp"]
+[ext_resource type="Texture2D" uid="uid://b0l6h50glrkj8" path="res://sprites/jotem.victory.png" id="3_hmlmr"]
+[ext_resource type="Texture2D" uid="uid://dviywlwackc0d" path="res://assets/pixel-art-illustration-moon-pixelated-moon-shiny-moon-pixelated-for-the-pixel-art-game-and-icon-for-website-and-video-game-old-school-retro-vector-removebg-preview.png" id="4_nxhlx"]
+[ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="5_su82o"]
+
+[node name="Victory" type="Node2D"]
+script = ExtResource("1_bmyfn")
+
+[node name="Desktop-wallpaper-dark-space-minimal-art-chromebook-pixel" type="Sprite2D" parent="."]
+position = Vector2(574.501, 325.5)
+scale = Vector2(1.35882, 1.14007)
+texture = ExtResource("2_ltbtp")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 352.0
+offset_right = 684.0
+offset_bottom = 402.0
+theme_override_font_sizes/font_size = 0
+text = "Return to Menu
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(952, 400)
+scale = Vector2(3.27384, 3.83616)
+texture = ExtResource("3_hmlmr")
+
+[node name="Pixel-art-illustration-moon-pixelated-moon-shiny-moon-pixelated-for-the-pixel-art-game-and-icon-for-website-and-video-game-old-school-retro-vector-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(176, 184)
+scale = Vector2(0.561191, 0.516092)
+texture = ExtResource("4_nxhlx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 384.0
+offset_top = 192.0
+offset_right = 777.0
+offset_bottom = 308.0
+theme_override_fonts/font = ExtResource("5_su82o")
+theme_override_font_sizes/font_size = 75
+text = "Victory!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

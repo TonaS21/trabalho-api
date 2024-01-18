@@ -7,8 +7,10 @@ public partial class world : Node2D
 	public Node2D SpawnLocation;
 	
 	public double timePassed = 0;
-	public double multiplier = 4.5;
+	public double multiplier = 5;
 	public double multiplierCooldown = 0;
+	
+	public bool bossCanSpawn = true;
 
 	public override void _Ready()
 	{
@@ -38,8 +40,8 @@ public partial class world : Node2D
 			timePassed = 0;
 		}
 		
-		if(delta == 15) {  //quanto tempo passou
-			GD.Print("ghe");
+		hud HUD = GetTree().Root.GetNode("World").GetNode("Player").GetNode("Camera2D").GetNode<hud>("HUD");
+		if(HUD.seconds == 0 && HUD.min == 3 && bossCanSpawn == true) {  //quanto tempo passou
 			var bos = GD.Load<PackedScene>("res://boss.tscn");
 			var enem = bos.Instantiate<CharacterBody2D>();
 			AddChild(enem);
@@ -49,10 +51,11 @@ public partial class world : Node2D
 			var node = nodes[(int) ran.Next(0, nodes.Count - 1) ] as Marker2D;
 			var position = node.Position;
 			SpawnLocation.Position = position;
+			bossCanSpawn = false;
 		}
 		
-		if(multiplierCooldown >= 20 && multiplier >= 1) {
-			multiplier -= 0.5;
+		if(multiplierCooldown >= 10 && multiplier >= 0.75) {
+			multiplier -= 0.25;
 			multiplierCooldown = 0;
 		}
 	}

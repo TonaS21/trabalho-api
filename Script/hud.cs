@@ -37,6 +37,10 @@ public partial class hud : Node2D
 		} else {
 			Label.Text = min.ToString() + ":" + seconds.ToString();
 		}
+		
+		if(seconds == 0 && min == 0) {
+			GetTree().ChangeSceneToFile("res://victory.tscn");
+		}
 
 	}
 	
@@ -55,10 +59,10 @@ public partial class hud : Node2D
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
 		
-		if(coinsCollected >= 10 && Input.IsActionPressed("upgrade1"))
+		if(coinsCollected >= 15) //&& Input.IsActionPressed("upgrade1")
 		{
-			coinsCollected -= 10;
-			Player.swordDamage += 1;
+			coinsCollected -= 15;
+			Player.swordDamage += 5;
 		}
 	}
 
@@ -67,10 +71,10 @@ public partial class hud : Node2D
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
 		
-		if(coinsCollected >= 10 && Input.IsActionPressed("upgrade2"))
+		if(coinsCollected >= 15) //&& Input.IsActionPressed("upgrade2")
 		{
-			coinsCollected -= 10;
-			Player.tiroDamage += 1;
+			coinsCollected -= 15;
+			Player.tiroDamage += 5;
 		}
 	}
 
@@ -78,7 +82,7 @@ public partial class hud : Node2D
 	private void _on_upgrade_3_pressed()
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
-		if(coinsCollected >= 10 && Player.health <= 90 && Input.IsActionPressed("upgrade3")) {
+		if(coinsCollected >= 10 && Player.health <= 90) { //&& Input.IsActionPressed("upgrade3")
 			Player.health += 10;
 			coinsCollected -= 10;
 		}
@@ -90,6 +94,5 @@ public partial class hud : Node2D
 		{
 			GetTree().ChangeSceneToFile("res://main.tscn");
 		}         
-
 	}
 }

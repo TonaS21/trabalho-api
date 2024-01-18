@@ -12,6 +12,8 @@ public partial class boss_attack : Area2D
 	public override void _Ready()
 	{
 		this.velocity = 10;
+		timer = GetNode<Timer>("AttackTimer");
+		timer.Start();
 	}
 
 	public override void _Process(double delta)
@@ -19,8 +21,9 @@ public partial class boss_attack : Area2D
 		Position += direction*velocity;
 	}
 	
-	private void _on_visible_on_screen_enabler_2d_screen_exited()
+	private void _on_attack_timer_timeout()
 	{
 		QueueFree();
 	}
 }
+
