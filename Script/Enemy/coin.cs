@@ -4,9 +4,12 @@ using System;
 public partial class coin : Area2D
 {
 	AnimationPlayer animationPlayer;
+	Timer timer;
 
 	public override void _Ready()
 	{
+		timer = GetNode<Timer>("Timer");
+		timer.Start();
 	}
 
 	public override void _Process(double delta)
