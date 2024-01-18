@@ -91,13 +91,12 @@ public partial class boss : CharacterBody2D
 		}
 	}
 
-	private void SpawnCoin()
+	private void SpawnDiamond()
 	{
-		var scene = GD.Load<PackedScene>("res://coin.tscn");
-		var coin = scene.Instantiate<Area2D>();
-		AddSibling(coin);
-		coin.Visible = true;
-		coin.Position = Position;
+		var scene = GD.Load<PackedScene>("res://diamond.tscn");
+		var diamond = scene.Instantiate<Area2D>();
+		AddSibling(diamond);
+		diamond.Position = Position;
 	}
 	
 	public async void BossAttack() {
@@ -111,7 +110,7 @@ public partial class boss : CharacterBody2D
 			Bosss.velocity = 5;
 			AddSibling(Bosss);
 			Bosss.Visible = true;
-			await ToSignal(GetTree().CreateTimer(0.3f), SceneTreeTimer.SignalName.Timeout);
+			await ToSignal(GetTree().CreateTimer(0.4f), SceneTreeTimer.SignalName.Timeout);
 			boss_attack_cooldown = true;
 		}
 	}
@@ -123,7 +122,7 @@ public partial class boss : CharacterBody2D
 		animationPlayer.Play("Death");
 		Speed = 0;
 		await ToSignal(GetTree().CreateTimer(0.35f), SceneTreeTimer.SignalName.Timeout);
-		SpawnCoin();
+		SpawnDiamond();
 		QueueFree();
 	}
 }

@@ -123,6 +123,8 @@ public partial class player : CharacterBody2D
 			} else {
 				health = 100;
 			}
+		} else if (area.IsInGroup("diamond")) {	
+			health = 100;
 		} else if (area is boss_attack) {	
 			en_range = true;
 			damage = 10;

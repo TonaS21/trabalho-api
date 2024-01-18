@@ -84,14 +84,15 @@ public partial class enemy : CharacterBody2D
 		var scene = GD.Load<PackedScene>("res://coin.tscn");
 		var coin = scene.Instantiate<Area2D>();
 		AddSibling(coin);
-		coin.Visible = true;
 		coin.Position = Position;
 	}
 	
 	public async void OnEnemyDeath()
 	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		enHealth = 0;
+		Player.en_range = false;
 		animationPlayer.Play("Death");
 		Speed = 0;
 		await ToSignal(GetTree().CreateTimer(0.6f), SceneTreeTimer.SignalName.Timeout);

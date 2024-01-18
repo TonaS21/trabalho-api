@@ -24,11 +24,13 @@ text = "Return to Menu
 "
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(952, 400)
 scale = Vector2(3.27384, 3.83616)
 texture = ExtResource("3_hmlmr")
 
 [node name="Pixel-art-illustration-moon-pixelated-moon-shiny-moon-pixelated-for-the-pixel-art-game-and-icon-for-website-and-video-game-old-school-retro-vector-removebg-preview" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(176, 184)
 scale = Vector2(0.561191, 0.516092)
 texture = ExtResource("4_nxhlx")

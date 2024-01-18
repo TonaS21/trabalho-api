@@ -12,8 +12,8 @@ config_version=5
 
 config/name="JOGO API"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.1", "C#", "Mobile")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.2", "C#", "Mobile")
+config/icon="res://assets/pixel-art-fictional-planet-png-removebg-preview.png"
 
 [display]
 

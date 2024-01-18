@@ -41,7 +41,6 @@ public partial class hud : Node2D
 		if(seconds == 0 && min == 0) {
 			GetTree().ChangeSceneToFile("res://victory.tscn");
 		}
-
 	}
 	
 	public void TimerReset() {

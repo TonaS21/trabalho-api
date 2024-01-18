@@ -92,8 +92,10 @@ public partial class enemy_2 : CharacterBody2D
 
 	private async void OnEnemyDeath()
 	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		enHealth = 0;
+		Player.en_range = false;
 		animationPlayer.Play("Death");
 		Speed = 0;
 		await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);
