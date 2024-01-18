@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c0gwl18jory4c"]
+[gd_scene load_steps=52 format=3 uid="uid://c0gwl18jory4c"]
 
 [ext_resource type="Script" path="res://Script/Player/player.cs" id="1_krmnc"]
 [ext_resource type="Texture2D" uid="uid://c3yexyffefxwc" path="res://sprites/characters/Jotem_idle.png" id="2_2qamq"]
@@ -243,14 +243,12 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
-"speed": 7.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1b0"]
 radius = 4.02392
 height = 33.9924
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
 
 [sub_resource type="Animation" id="Animation_x6e74"]
 resource_name = "Attack1"
@@ -298,7 +296,7 @@ tracks/3/path = NodePath("AnimatedSprite2D/SwordArea2D/CollisionShape2D:disabled
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.9),
+"times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -422,7 +420,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_j0vtg"]
 resource_name = "Run"
-length = 0.65
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -442,10 +440,10 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 7]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -454,19 +452,50 @@ tracks/2/path = NodePath("AnimatedSprite2D/SwordArea2D/CollisionShape2D:disabled
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.65),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
 }
 
+[sub_resource type="Animation" id="Animation_hv7k5"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_med7w"]
 _data = {
 "Attack1": SubResource("Animation_x6e74"),
+"Death": SubResource("Animation_hv7k5"),
 "Idle": SubResource("Animation_el8o8"),
 "RESET": SubResource("Animation_b11p3"),
 "Run": SubResource("Animation_j0vtg")
 }
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t476"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrrnw"]
 radius = 22.0
@@ -504,6 +533,9 @@ disabled = true
 debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_med7w")
+}
 tree_root = SubResource("AnimationNodeStateMachine_8t476")
 anim_player = NodePath("../AnimationPlayer")
 

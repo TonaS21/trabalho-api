@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ch8ps2838cm12"]
+[gd_scene load_steps=32 format=3 uid="uid://ch8ps2838cm12"]
 
 [ext_resource type="Script" path="res://Script/Enemy/enemy.cs" id="1_qkttq"]
 [ext_resource type="Texture2D" uid="uid://dqgi2qogs6ogb" path="res://sprites/characters/Massacre_idle.png" id="2_3iesj"]
@@ -236,8 +236,37 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_qa2iw"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rjjtm"]
 _data = {
+"Death": SubResource("Animation_qa2iw"),
 "Idle": SubResource("Animation_pxxfh"),
 "RESET": SubResource("Animation_jppqb"),
 "Run": SubResource("Animation_i3y4l")
@@ -263,12 +292,15 @@ sprite_frames = SubResource("SpriteFrames_k02g3")
 animation = &"Idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_rjjtm")
 }
+autoplay = "Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rjjtm")
+}
 tree_root = SubResource("AnimationNodeStateMachine_k1tnw")
 anim_player = NodePath("../AnimationPlayer")
 

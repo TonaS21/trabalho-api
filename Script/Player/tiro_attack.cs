@@ -22,7 +22,6 @@ public partial class tiro_attack : Area2D
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
-		//GD.Print("geh");
 	}
 }
 

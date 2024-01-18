@@ -13,6 +13,8 @@ public partial class hud : Node2D
 
 	public override void _Process(double delta)
 	{
+		var coinsDisplay = GetNode<Label>("Moedas");
+		coinsDisplay.Text = coinsCollected + " coins";
 	}
 	
 	public override void _Ready()
@@ -47,5 +49,47 @@ public partial class hud : Node2D
 		coinsCollected += CoinsValue;
 		var coinsDisplay = GetNode<Label>("Moedas");
 		coinsDisplay.Text = coinsCollected + " coins";
+	}
+
+	private void _on_upgrade_1_pressed()
+	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
+		
+		if(coinsCollected >= 10 && Input.IsActionPressed("upgrade1"))
+		{
+			coinsCollected -= 10;
+			Player.swordDamage += 1;
+		}
+	}
+
+
+	private void _on_upgrade_2_pressed()
+	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
+		
+		if(coinsCollected >= 10 && Input.IsActionPressed("upgrade2"))
+		{
+			coinsCollected -= 10;
+			Player.tiroDamage += 1;
+		}
+	}
+
+
+	private void _on_upgrade_3_pressed()
+	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
+		if(coinsCollected >= 10 && Player.health <= 90 && Input.IsActionPressed("upgrade3")) {
+			Player.health += 10;
+			coinsCollected -= 10;
+		}
+	}
+	
+	public override void _Input(InputEvent @event)
+ 	{
+		if (@event.IsActionPressed("pause"))
+		{
+			GetTree().ChangeSceneToFile("res://main.tscn");
+		}         
+
 	}
 }

@@ -3,7 +3,7 @@ using System;
 
 public partial class enemy : CharacterBody2D
 {
-	public const float Speed = 150f;
+	public float Speed = 150f;
 
 	Vector2 playerPosition;
 	Vector2 mobPosition = Vector2.Zero;
@@ -15,8 +15,7 @@ public partial class enemy : CharacterBody2D
 	bool player_in_att_zone = false; 
 	public bool en_attack_cooldown = true;
 	public int enHealth = 10;
-	player Player = new player();
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -28,9 +27,8 @@ public partial class enemy : CharacterBody2D
 
 		velocity = Vector2.Zero;
 
-		if (mobPosition.DistanceTo(playerPosition) < 50000) {
+		if (mobPosition.DistanceTo(playerPosition) < 50000 && Speed > 0) {
 			velocity = targetPosition;
-			animationPlayer.Play("Run");
 			if(velocity.X < 0) {
 				animationPlayer.Play("Run");
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
@@ -38,8 +36,6 @@ public partial class enemy : CharacterBody2D
 				animationPlayer.Play("Run");
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
 			}
-		} else {
-			animationPlayer.Play("Idle");
 		}
 
 		velocity = velocity * Speed;
@@ -57,9 +53,11 @@ public partial class enemy : CharacterBody2D
 	
 	private void _on_enemy_hit_box_area_entered(Area2D area)
 	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
 		if(area.Name == "SwordArea2D") {
 			if(enHealth - Player.swordDamage > 0) {
 				enHealth -= Player.swordDamage;
+				GD.Print(Player.swordDamage);
 			} else {
 				OnEnemyDeath();
 			}
@@ -90,9 +88,13 @@ public partial class enemy : CharacterBody2D
 		coin.Position = Position;
 	}
 	
-	private void OnEnemyDeath()
+	public async void OnEnemyDeath()
 	{
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		enHealth = 0;
+		animationPlayer.Play("Death");
+		Speed = 0;
+		await ToSignal(GetTree().CreateTimer(0.6f), SceneTreeTimer.SignalName.Timeout);
 		SpawnCoin();
 		QueueFree();
 	}

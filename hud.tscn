@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkquivabmtnor"]
+[gd_scene load_steps=9 format=3 uid="uid://bkquivabmtnor"]
 
 [ext_resource type="Script" path="res://Script/hud.cs" id="1_cnlkm"]
 [ext_resource type="FontFile" uid="uid://dxk43ues72pfe" path="res://assets/Kenney Pixel Square.ttf" id="1_inpmi"]
 [ext_resource type="Texture2D" uid="uid://gamcurijlcag" path="res://sprites/Coin/Coin-1.png.png" id="3_0dvkd"]
+[ext_resource type="Texture2D" uid="uid://cactjxciu1dc6" path="res://sprites/characters/Jotem.spada.png" id="4_ekgey"]
+[ext_resource type="Texture2D" uid="uid://4ejwtcqho14o" path="res://sprites/characters/Jotem button.png" id="5_yrhen"]
+[ext_resource type="Texture2D" uid="uid://c4p4fionay2c" path="res://sprites/Item 3-1.png.png" id="6_yt62a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qid1r"]
 font_size = 25
@@ -45,4 +48,33 @@ position = Vector2(1120, 608)
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("3_0dvkd")
 
+[node name="Upgrade1" type="Button" parent="."]
+offset_left = 816.0
+offset_top = 16.0
+offset_right = 912.0
+offset_bottom = 104.0
+icon = ExtResource("4_ekgey")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Upgrade2" type="Button" parent="."]
+offset_left = 936.0
+offset_top = 16.0
+offset_right = 1027.0
+offset_bottom = 104.0
+icon = ExtResource("5_yrhen")
+icon_alignment = 1
+
+[node name="Upgrade3" type="Button" parent="."]
+offset_left = 1048.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 104.0
+icon = ExtResource("6_yt62a")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="pressed" from="Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="Upgrade2" to="." method="_on_upgrade_2_pressed"]
+[connection signal="pressed" from="Upgrade3" to="." method="_on_upgrade_3_pressed"]

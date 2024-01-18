@@ -3,7 +3,7 @@ using System;
 
 public partial class enemy_2 : CharacterBody2D
 {
-	public const float Speed = 100f;
+	public float Speed = 100f;
 
 	Vector2 playerPosition;
 	Vector2 mobPosition = Vector2.Zero;
@@ -15,7 +15,6 @@ public partial class enemy_2 : CharacterBody2D
 	bool player_in_att_zone = false; 
 	public bool en_attack_cooldown = true;
 	public int enHealth = 25;
-	player Player = new player();
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -28,18 +27,15 @@ public partial class enemy_2 : CharacterBody2D
 
 		velocity = Vector2.Zero;
 
-		if (mobPosition.DistanceTo(playerPosition) < 50000) {
+		if (mobPosition.DistanceTo(playerPosition) < 50000 && Speed > 0) {
 			velocity = targetPosition;
-			animationPlayer.Play("Run");
-			if(velocity.X < 0) {
+			if(velocity.X < 0 && animationPlayer.CurrentAnimation != "Attack") {
 				animationPlayer.Play("Run");
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
-			} else if (velocity.X > 0) {
+			} else if (velocity.X > 0 && animationPlayer.CurrentAnimation != "Attack") {
 				animationPlayer.Play("Run");
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
 			}
-		} else {
-			animationPlayer.Play("Idle");
 		}
 
 		velocity = velocity * Speed;
@@ -50,8 +46,10 @@ public partial class enemy_2 : CharacterBody2D
 	
 	private void _on_enemy_hit_box_body_entered(Node2D body)
 	{
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		if(body.Name == "Player") {
 			player_in_att_zone = true;
+			animationPlayer.Play("Attack");
 		}
 	}
 
@@ -65,6 +63,8 @@ public partial class enemy_2 : CharacterBody2D
 
 	private void _on_enemy_hit_box_area_entered(Area2D area)
 	{
+		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
+		player_in_att_zone = true;
 		if(area.Name == "SwordArea2D") {
 			if(enHealth - Player.swordDamage > 0) {
 				enHealth -= Player.swordDamage;
@@ -90,9 +90,13 @@ public partial class enemy_2 : CharacterBody2D
 		Coin.Position = Position;
 	}
 
-	private void OnEnemyDeath()
+	private async void OnEnemyDeath()
 	{
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		enHealth = 0;
+		animationPlayer.Play("Death");
+		Speed = 0;
+		await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);
 		SpawnCoin();
 		QueueFree();
 	}

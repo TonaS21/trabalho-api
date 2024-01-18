@@ -3,7 +3,7 @@ using System;
 
 public partial class player : CharacterBody2D
 {
-	public const float speed = 300f; //original 200
+	public float speed = 300f; //original 200
 	
 	public AnimationPlayer animationPlayer;
 	public Timer timer;
@@ -22,6 +22,7 @@ public partial class player : CharacterBody2D
 	public Vector2 direction;
 	
 	public bool pl_tiroattack_cooldown = true;
+	public bool attackfromboss = true;
 	public int swordDamage = 10;
 	public int tiroDamage = 5;
 
@@ -84,7 +85,7 @@ public partial class player : CharacterBody2D
 		}
 	}
 
-	public void EnemyAttack() {
+	public async void EnemyAttack() {
 		if(en_range && en_attack_cooldown == true) {
 			timer = GetNode<Timer>("Cooldown");
 			if(health - damage > 0) {
@@ -93,7 +94,11 @@ public partial class player : CharacterBody2D
 				timer.Start();
 			} else {
 				health = 0;
+				speed = 0;
 				playerAlive = false;
+				animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+				animationPlayer.Play("Death");
+				await ToSignal(GetTree().CreateTimer(0.6f), SceneTreeTimer.SignalName.Timeout);
 				GetTree().ChangeSceneToFile("res://game_over.tscn");
 			}
 		}
@@ -107,7 +112,7 @@ public partial class player : CharacterBody2D
 		} else if (body.IsInGroup("enemy2")) {
 			damage = 20;
 			en_range = true;
-		}
+		} 
 	}
 	
 	private void _on_player_hit_box_area_entered(Area2D area)
@@ -115,11 +120,11 @@ public partial class player : CharacterBody2D
 		if (area.IsInGroup("coin")) {
 			if (health <= 95) {
 				health = health + 5;
-				GD.Print("+ vida");
 			} else {
 				health = 100;
-				GD.Print("não");
 			}
+		} else if (area.Name == "BossAttack") {	
+			damage = 10;
 		}
 	}	
 	
@@ -128,11 +133,6 @@ public partial class player : CharacterBody2D
 		if(body.IsInGroup("enemy") || body.IsInGroup("enemy2")) {
 			en_range = false;
 		}
-	}
-	
-	private void _on_sword_area_2d_body_entered(Node2D body)
-	{
-	
 	}
 	
 	private void _on_cooldown_timeout()

@@ -11,7 +11,7 @@ height = 80.0
 
 [sub_resource type="Animation" id="Animation_5qdvc"]
 resource_name = "Attack"
-length = 1.1
+length = 1.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -51,7 +51,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_qb5xs"]
 resource_name = "Death"
-length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -471,6 +470,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08b0a")
+}
 tree_root = SubResource("AnimationNodeStateMachine_mtjmr")
 anim_player = NodePath("../AnimationPlayer")
 

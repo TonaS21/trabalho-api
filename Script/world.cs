@@ -7,7 +7,7 @@ public partial class world : Node2D
 	public Node2D SpawnLocation;
 	
 	public double timePassed = 0;
-	public double multiplier = 5;
+	public double multiplier = 4.5;
 	public double multiplierCooldown = 0;
 
 	public override void _Ready()
@@ -36,6 +36,19 @@ public partial class world : Node2D
 			SpawnLocation.Position = position;
 			
 			timePassed = 0;
+		}
+		
+		if(delta == 15) {  //quanto tempo passou
+			GD.Print("ghe");
+			var bos = GD.Load<PackedScene>("res://boss.tscn");
+			var enem = bos.Instantiate<CharacterBody2D>();
+			AddChild(enem);
+			SpawnLocation = GetNode<Node2D>("SpawnLocation");
+			enem.Position = SpawnLocation.Position;
+			var nodes = GetTree().GetNodesInGroup("spawn");
+			var node = nodes[(int) ran.Next(0, nodes.Count - 1) ] as Marker2D;
+			var position = node.Position;
+			SpawnLocation.Position = position;
 		}
 		
 		if(multiplierCooldown >= 20 && multiplier >= 1) {
