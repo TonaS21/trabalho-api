@@ -54,6 +54,7 @@ public partial class enemy : CharacterBody2D
 	private void _on_enemy_hit_box_area_entered(Area2D area)
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
+		
 		if(area.Name == "SwordArea2D") {
 			if(enHealth - Player.swordDamage > 0) {
 				enHealth -= Player.swordDamage;
