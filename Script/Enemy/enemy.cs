@@ -46,7 +46,7 @@ public partial class enemy : CharacterBody2D
 	
 	private void _on_enemy_hit_box_body_entered(Node2D body)
 	{
-		if(body.Name == "Player") {
+		if(body is player) {
 			player_in_att_zone = true;
 		}
 	}
@@ -75,7 +75,7 @@ public partial class enemy : CharacterBody2D
 
 	private void _on_enemy_hit_box_body_exited(Node2D body)
 	{
-		if(body.Name == "Player") {
+		if(body is player) {
 			player_in_att_zone = false;
 		}
 	}

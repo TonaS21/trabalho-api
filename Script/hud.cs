@@ -65,7 +65,6 @@ public partial class hud : Node2D
 		}
 	}
 
-
 	private void _on_upgrade_2_pressed()
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
@@ -77,13 +76,17 @@ public partial class hud : Node2D
 		}
 	}
 
-
 	private void _on_upgrade_3_pressed()
 	{
 		player Player = GetTree().Root.GetNode("World").GetNode<player>("Player");
-		if(coinsCollected >= 10 && Player.health <= 90) { //&& Input.IsActionPressed("upgrade3")
-			Player.health += 10;
+		if(coinsCollected >= 10 && Player.health <= 85) { //&& Input.IsActionPressed("upgrade3")
+			Player.health += 15;
 			coinsCollected -= 10;
+		} else if(coinsCollected >= 10 && Player.health > 85 && Player.health < 100) { //&& Input.IsActionPressed("upgrade3")
+			Player.health = 100;
+			coinsCollected -= 10;
+		} else if(Player.health == 100) {
+			GD.Print("não");
 		}
 	}
 	

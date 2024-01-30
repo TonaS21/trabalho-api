@@ -106,10 +106,10 @@ public partial class player : CharacterBody2D
 
 	private void _on_player_hit_box_body_entered(CharacterBody2D body)
 	{
-		if(body.IsInGroup("enemy")) {
+		if(body is enemy) {
 			damage = 10;
 			en_range = true;
-		} else if (body.IsInGroup("enemy2")) {
+		} else if (body is enemy_2) {
 			damage = 20;
 			en_range = true;
 		} 
@@ -117,13 +117,13 @@ public partial class player : CharacterBody2D
 	
 	private void _on_player_hit_box_area_entered(Area2D area)
 	{
-		if (area.IsInGroup("coin")) {
+		if (area is coin) {
 			if (health <= 95) {
 				health = health + 5;
 			} else {
 				health = 100;
 			}
-		} else if (area.IsInGroup("diamond")) {	
+		} else if (area is diamond) {	
 			health = 100;
 		} else if (area is boss_attack) {	
 			en_range = true;
@@ -133,7 +133,7 @@ public partial class player : CharacterBody2D
 	
 	private void _on_player_hit_box_body_exited(CharacterBody2D body)
 	{
-		if(body.IsInGroup("enemy") || body.IsInGroup("enemy2")) {
+		if(body is enemy || body is enemy_2) {
 			en_range = false;
 		}
 	}

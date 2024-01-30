@@ -47,7 +47,7 @@ public partial class enemy_2 : CharacterBody2D
 	private void _on_enemy_hit_box_body_entered(Node2D body)
 	{
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		if(body.Name == "Player") {
+		if(body is player) {
 			player_in_att_zone = true;
 			animationPlayer.Play("Attack");
 		}
@@ -56,7 +56,7 @@ public partial class enemy_2 : CharacterBody2D
 
 	private void _on_enemy_hit_box_body_exited(Node2D body)
 	{
-		if(body.Name == "Player") {
+		if(body is player) {
 			player_in_att_zone = false;
 		}
 	}
