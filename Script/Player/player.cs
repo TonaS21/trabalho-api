@@ -3,7 +3,7 @@ using System;
 
 public partial class player : CharacterBody2D
 {
-	public float speed = 300f; //original 200
+	public float speed = 300f;
 	
 	public AnimationPlayer animationPlayer;
 	public Timer timer;

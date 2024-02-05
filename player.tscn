@@ -507,7 +507,7 @@ bg_color = Color(0.247059, 0.247059, 0.247059, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0mho"]
 bg_color = Color(0.796078, 0.0352941, 0, 1)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_krmnc")
 

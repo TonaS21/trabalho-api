@@ -278,7 +278,7 @@ _data = {
 radius = 15.9851
 height = 63.9983
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_qkttq")
 

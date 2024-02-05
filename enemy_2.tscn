@@ -457,7 +457,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4lw4k"]
 radius = 40.0
 
-[node name="Enemy2" type="CharacterBody2D" groups=["enemy2"]]
+[node name="Enemy2" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_hks8r")
 

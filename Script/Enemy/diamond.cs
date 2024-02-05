@@ -20,7 +20,7 @@ public partial class diamond : Area2D
 
 	private void _on_body_entered(CharacterBody2D body)
 	{
- 		if(body.IsInGroup("player"))
+ 		if(body is player)
 		{
 			QueueFree();
 		}

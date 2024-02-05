@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cjkwtrli1bvab"]
 
-[ext_resource type="Script" path="res://sprites/Coin/diamond.cs" id="1_pjqtp"]
+[ext_resource type="Script" path="res://Script/Enemy/diamond.cs" id="1_pjqtp"]
 [ext_resource type="Texture2D" uid="uid://ca7tp8oii4q8c" path="res://sprites/spr_coin_azu.png" id="1_sd51k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30x7h"]
@@ -42,6 +42,8 @@ animations = [{
 "name": &"Diamond",
 "speed": 5.0
 }]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y26pw"]
 
 [sub_resource type="Animation" id="Animation_vsj75"]
 resource_name = "Diamond"
@@ -104,9 +106,7 @@ _data = {
 "RESET": SubResource("Animation_8pd6o")
 }
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y26pw"]
-
-[node name="Diamond" type="Area2D" groups=["diamond"]]
+[node name="Diamond" type="Area2D"]
 script = ExtResource("1_pjqtp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -120,9 +120,6 @@ sprite_frames = SubResource("SpriteFrames_ni1cq")
 animation = &"Diamond"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_wmowg")
-}
 tree_root = SubResource("AnimationNodeStateMachine_y26pw")
 anim_player = NodePath("../AnimationPlayer")
 

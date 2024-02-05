@@ -20,7 +20,7 @@ public partial class coin : Area2D
 
 	private void _on_body_entered(CharacterBody2D body)
 	{
- 		if(body.IsInGroup("player"))
+ 		if(body is player)
 		{
 			hud HUD = GetTree().Root.GetNode("World").GetNode("Player").GetNode("Camera2D").GetNode<hud>("HUD");
 			HUD.addCoin();
